@@ -20,36 +20,36 @@ Now let's create a blank folder for our tests, in it we need to create a `.papar
   "out": "screenies",
   
   // List of routes you wanna screenshot
-	"routes": [
-		"uk",
-		"showcase",
-		"uk/subscribe",
-		"uk/subscribe/paper",
-		"uk/subscribe/digital",
-		"uk/subscribe/weekly",
-		"uk/contribute",
-		"uk/contribute/recurring",
-		"paypal/return"
-	],
+  "routes": [
+    "uk",
+    "showcase",
+    "uk/subscribe",
+    "uk/subscribe/paper",
+    "uk/subscribe/digital",
+    "uk/subscribe/weekly",
+    "uk/contribute",
+    "uk/contribute/recurring",
+    "paypal/return"
+  ],
   
   // Domain you want to test the routes against
-	"prefix": "https://support.thegulocal.com/",
+  "prefix": "https://support.thegulocal.com/",
   
   // Screen size pairs
-	"sizes": {
-		"desktop": {
-			"width": 1440,
-			"height": 900
-		},
-		"phone": {
-			"width": 375,
-			"height": 1100
-		},
-		"tablet": {
-			"height": 1024,
-			"width": 768
-		}
-	}
+  "sizes": {
+    "desktop": {
+      "width": 1440,
+      "height": 900
+    },
+    "phone": {
+      "width": 375,
+      "height": 1100
+    },
+    "tablet": {
+      "height": 1024,
+      "width": 768
+    }
+  }
 }
 ```
 Now run `paparazzi` and watch the screenshots appear in front of your eyes.
