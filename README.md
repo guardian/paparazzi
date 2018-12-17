@@ -57,5 +57,8 @@ Now run `paparazzi` and watch the screenshots appear in front of your eyes.
 ### Can I set this up as a CI step?
 Maybe? If you do please let me know, i'd love to get this thing commenting with screenshots on PRs
 
+### Help my computer caught fire
+Paparazzi spins a whole chrome instance per route, if this is a problem for you please consider either throwing sticks of ram at your laptop until the fire is out or help me implement something <a href="https://github.com/GoogleChrome/puppeteer/issues/1479">like this</a>
+
 ### (1) Can I use this locally?
 Sure thing pal! Just run `./index.js` or `node index.js` in the `paparazzizi` folder. You will have to put your `.paparazzirc` file in there.
