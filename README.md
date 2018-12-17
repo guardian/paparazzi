@@ -69,6 +69,7 @@ Now run `paparazzi` or `npx @guardian/paparazzi` and watch the screenshots appea
 
 That would be awesome! If you do please let us know and we'll add it to the docs. A great use case would be to automatically add screenshots on your PRs as a comment.
 
-### Help! my computer caught fire
+### How can I make full length screenshots?
 
-Paparazzi spins a whole chrome instance per route, this is not efficient and can break havoc when using many routes. There are solutions that can be implemented such as <a href="https://github.com/GoogleChrome/puppeteer/issues/1479">this</a>. PRs welcome!
+Use the `"screenshot": { "fullPage": true }` config param. THe height of your size list will be used as the minimum height in this case.
+`
