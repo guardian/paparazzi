@@ -10,31 +10,25 @@ const { config } = {
 	...require('minimist')(process.argv.slice(2)),
 };
 
-const getConfig = () => {
-	const defaultConfig = {
-		sizes: {
-			phone: {
-				width: 375,
-				height: 1100,
-			},
-		},
-		out: 'screenshots',
-		screenshot: {},
-	};
+const fetchConfigFile = file => {
 	try {
-		const handle = readFileSync(resolve(process.cwd(), config), 'utf8');
-		return {
-			...defaultConfig,
-			...JSON.parse(handle),
-		};
+		return require(file);
 	} catch (error) {
-		console.error(chalk.red(`error!   ${error}`));
-		return defaultConfig;
+		try {
+			return JSON.parse(readFileSync(resolve(process.cwd(), config), 'utf8'));
+		} catch (error) {
+			console.error(chalk.red(`error!   ${error}`));
+			return {};
+		}
 	}
 };
 
 const getConfigOrFail = () => {
-	const conf = getConfig();
+	const conf = {
+		...fetchConfigFile(resolve(__dirname, '.defaultpaparazzirc')),
+		...fetchConfigFile(resolve(process.cwd(), config)),
+	};
+
 	if (!conf.prefix || !conf.routes || !conf.out) {
 		console.error(
 			chalk.red(`error!   Could not find ${config} in the current folder`)
