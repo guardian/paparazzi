@@ -1,8 +1,7 @@
 # Paparazzi
 Automated manual visual regression testing
 
-
-Sometimes you are working in a project with a couple of GRT routes and you are changing an element that's quite global and you want to make sure you aren't accidentally breaking some obscure part of the site sitting elsewhere. If this is you please keep reading!
+Sometimes you are working in a project with a couple of GET routes and you are changing an element that's quite global and you want to make sure you aren't accidentally breaking some obscure part of the site sitting elsewhere. If this is you please keep reading!
 
 <img width="1552" alt="screenshot 2018-12-17 at 10 31 45 am" src="https://user-images.githubusercontent.com/11539094/50081816-4a789380-01e7-11e9-896e-b3d8174dd396.png">
 
