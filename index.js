@@ -3,9 +3,9 @@
 const puppeteer = require('puppeteer');
 const chalk = require('chalk');
 const { resolve } = require('path');
-const { readFileSync } = require('fs');
+const { readFileSync, mkdirSync } = require('fs');
 
-const takeShot = async (path, { prefix, sizes }) => {
+const takeShot = async (path, { prefix, sizes, out }) => {
 	console.log(`started ${path}`);
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
@@ -14,7 +14,7 @@ const takeShot = async (path, { prefix, sizes }) => {
 	for (let size in sizes) {
 		await page.setViewport(sizes[size]);
 		await page.screenshot({
-			path: `shots/${size}-${path.replace(/\//gi, '-')}.png`,
+			path: `${out}/${size}-${path.replace(/\//gi, '-')}.png`,
 		});
 		console.log(chalk.blue(`done    ${path} – ${size}`));
 	}
@@ -24,14 +24,15 @@ const takeShot = async (path, { prefix, sizes }) => {
 };
 
 (async () => {
-	const { prefix, sizes, routes } = JSON.parse(
+	const { prefix, sizes, routes, out } = JSON.parse(
 		readFileSync(resolve(__dirname, '.paparazzirc'), 'utf8')
 	);
+	mkdirSync(resolve(__dirname, out));
 	if (!prefix || !sizes || !routes) {
 		console.error(
 			chalk.red('Could not find .paparazzirc in the project folder')
 		);
 		process.exit(1);
 	}
-	await Promise.all(routes.map(r => takeShot(r, { prefix, sizes })));
+	await Promise.all(routes.map(r => takeShot(r, { prefix, sizes, out })));
 })();
