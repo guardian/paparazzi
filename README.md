@@ -65,4 +65,4 @@ That would be awesome! If you do please let us know and we'll add it to the docs
 
 ### Help! my computer caught fire
 
-Paparazzi spins a whole chrome instance per route, this is not efficient and can break havoc when using many routes. THere are solutions that can be implmeented such as <a href="https://github.com/GoogleChrome/puppeteer/issues/1479">this</a>. PRs welcome!
+Paparazzi spins a whole chrome instance per route, this is not efficient and can break havoc when using many routes. There are solutions that can be implemented such as <a href="https://github.com/GoogleChrome/puppeteer/issues/1479">this</a>. PRs welcome!
