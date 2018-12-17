@@ -1,0 +1,14 @@
+{
+	"name": "paparazzi",
+	"version": "1.0.0",
+	"description": "Takes a ton of screenshots",
+	"main": "index.js",
+	"bin": {
+		"paparazzi": "index.js"
+	},
+	"author": "Lau mayhem",
+	"dependencies": {
+		"chalk": "^2.4.1",
+		"puppeteer": "^1.11.0"
+	}
+}
