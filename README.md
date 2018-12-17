@@ -58,5 +58,4 @@ Now run `paparazzi` and watch the screenshots appear in front of your eyes.
 Maybe? If you do please let me know, i'd love to get this thing commenting with screenshots on PRs
 
 ### (1) Can I use this locally?
-
 Sure thing pal! Just run `./index.js` or `node index.js` in the `paparazzi folder`. You will have to put your `.paparazzirc` file in there.
