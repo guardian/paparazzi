@@ -20,9 +20,6 @@ Then in the folder you want to run tests for (this could be your project folder,
 
 ```
 {
-  // Name of the folder where screenshots will go to
-  "out": "screenies",
-
   // List of routes you wanna screenshot
   "routes": [
     "uk",
@@ -39,7 +36,16 @@ Then in the folder you want to run tests for (this could be your project folder,
   // Domain you want to test the routes against
   "prefix": "https://support.thegulocal.com/",
 
-  // Screen size pairs
+  // [optional] Name of the folder where screenshots will go to
+  "out": "screenies",
+
+  // [optional] Extra options for puppeteer's page.screenshot
+  "screenshot": {
+    "omitBackground": true,
+    "fullPage": true
+  },
+
+  // [optional] Screen size pairs
   "sizes": {
     "desktop": {
       "width": 1440,
