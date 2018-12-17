@@ -71,5 +71,4 @@ That would be awesome! If you do please let us know and we'll add it to the docs
 
 ### How can I make full length screenshots?
 
-Use the `"screenshot": { "fullPage": true }` config param. THe height of your size list will be used as the minimum height in this case.
-`
+Use the `"screenshot": { "fullPage": true }` config param. The heights on your size list will be used as the minimum viewport height in this case.
