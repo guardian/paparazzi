@@ -36,7 +36,7 @@ Then in the folder you want to run tests for (this could be your project folder,
   // Domain you want to test the routes against
   "prefix": "https://support.thegulocal.com/",
 
-  // (optional) Name of the folder where screenshots will go to
+  // [optional] Name of the folder where screenshots will go to
   "out": "screenies",
 
   // [optional] Extra options for puppeteer's page.screenshot
