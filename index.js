@@ -55,7 +55,7 @@ const getConfig = () => {
 (async () => {
 	const { prefix, sizes, routes, out, screenshot } = getConfig();
 	if (!prefix || !routes || !out) {
-		console.error(chalk.red('Could not find ${config} in the project folder'));
+		console.error(chalk.red(`Could not find ${config} in the current folder`));
 		process.exit(1);
 	}
 	const path = resolve(process.cwd(), out);
