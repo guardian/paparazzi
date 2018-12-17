@@ -1,6 +1,6 @@
 {
 	"name": "@guardian/paparazzi",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Automated manual visual regression testing",
 	"main": "index.js",
 	"bin": {
@@ -15,6 +15,7 @@
 		"chalk": "^2.4.1",
 		"minimist": "^1.2.0",
 		"mkdirp": "^0.5.1",
-		"puppeteer": "^1.11.0"
+		"puppeteer": "^1.11.0",
+		"puppeteer-cluster": "^0.12.1"
 	}
 }

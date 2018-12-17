@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const puppeteer = require('puppeteer');
+const { Cluster } = require('puppeteer-cluster');
 const chalk = require('chalk');
 const mkdirp = require('mkdirp');
 const { resolve } = require('path');
@@ -8,25 +8,6 @@ const { readFileSync } = require('fs');
 const { config } = {
 	config: '.paparazzirc',
 	...require('minimist')(process.argv.slice(2)),
-};
-
-const takeShot = async (route, { prefix, sizes, path, screenshot }) => {
-	console.log(`started ${route}`);
-	const browser = await puppeteer.launch();
-	const page = await browser.newPage();
-	await page.goto(`${prefix}${route}`);
-
-	for (let size in sizes) {
-		await page.setViewport(sizes[size]);
-		await page.screenshot({
-			path: `${path}/${size}-${route.replace(/\//gi, '-')}.png`,
-			...screenshot,
-		});
-		console.log(chalk.blue(`done    ${route} – ${size}`));
-	}
-	console.log(chalk.green(`done    ${route} – ALL`));
-
-	return browser.close();
 };
 
 const getConfig = () => {
@@ -47,20 +28,53 @@ const getConfig = () => {
 			...JSON.parse(handle),
 		};
 	} catch (error) {
-		console.error(chalk.red(`Error! ${error}`));
+		console.error(chalk.red(`error!   ${error}`));
 		return defaultConfig;
 	}
 };
 
-(async () => {
-	const { prefix, sizes, routes, out, screenshot } = getConfig();
-	if (!prefix || !routes || !out) {
-		console.error(chalk.red(`Could not find ${config} in the current folder`));
+const getConfigOrFail = () => {
+	const conf = getConfig();
+	if (!conf.prefix || !conf.routes || !conf.out) {
+		console.error(
+			chalk.red(`error!   Could not find ${config} in the current folder`)
+		);
 		process.exit(1);
 	}
-	const path = resolve(process.cwd(), out);
-	mkdirp.sync(path);
-	await Promise.all(
-		routes.map(r => takeShot(r, { prefix, sizes, path, screenshot }))
-	);
+	conf.out = resolve(process.cwd(), conf.out);
+	mkdirp.sync(conf.out);
+	return conf;
+};
+
+(async () => {
+	const { prefix, sizes, routes, screenshot, out } = getConfigOrFail();
+
+	const cluster = await Cluster.launch({
+		concurrency: Cluster.CONCURRENCY_CONTEXT,
+		maxConcurrency: require('os').cpus().length || 2,
+	});
+
+	await cluster.task(async ({ page, data }) => {
+		const { route } = data;
+		console.log(`started  ${route}`);
+		await page.goto([prefix, route].join('/'));
+
+		for (let size in sizes) {
+			try {
+				await page.setViewport(sizes[size]);
+				await page.screenshot({
+					path: `${out}/${size}-${route.replace(/\//gi, '-')}.png`,
+					...screenshot,
+				});
+				console.log(chalk.blue(`done     ${route} – ${size}`));
+			} catch (error) {
+				console.error(chalk.red(`error!   ${error}`));
+			}
+		}
+		console.log(chalk.green(`done     ${route} – ALL`));
+	});
+
+	await Promise.all(routes.map(route => cluster.queue({ route, prefix })));
+	await cluster.idle();
+	await cluster.close();
 })();
