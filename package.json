@@ -1,7 +1,7 @@
 {
 	"name": "@guardian/paparazzi",
-	"version": "0.0.1",
-	"description": "Takes a ton of screenshots",
+	"version": "0.0.2",
+	"description": "Automated manual visual regression testing",
 	"main": "index.js",
 	"bin": {
 		"paparazzi": "index.js"

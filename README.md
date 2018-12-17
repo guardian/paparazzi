@@ -1,23 +1,28 @@
 # Paparazzi
-Automated manual visual regression testing
 
-Sometimes you are working in a project with a couple of GET routes and you are changing an element that's quite global and you want to make sure you aren't accidentally breaking some obscure part of the site sitting elsewhere. If this is you please keep reading!
+📸 Automated manual visual regression testing
+
+Sometimes you are working in a project with a couple of `GET` routes and you are changing an element that's quite global and you want to make sure you aren't accidentally breaking some obscure part of the site sitting elsewhere. If this is you please keep reading!
 
 <img width="1552" alt="screenshot 2018-12-17 at 10 31 45 am" src="https://user-images.githubusercontent.com/11539094/50081816-4a789380-01e7-11e9-896e-b3d8174dd396.png">
 
-Paparazzi spins up a ton of browsers using <a href="https://github.com/GoogleChrome/puppeteer">puppeteer</a> and takes screenshots of all paths you specify at any sizes you specify.
+Paparazzi spins up a ton of chrome instances using <a href="https://github.com/GoogleChrome/puppeteer">puppeteer</a> and takes screenshots of all paths you specify at all sizes you specify.
 
 ## Install and setup
 
-Clone this repo and run `npm i` to install all dependencies (it's just puppeteer and chalk to make logs colourful. Very important.). Then run `npm link` to get a global `paparazzi` command(1). Let this sit wherever.
+```
+npm i -g @guardian/paparazzi
+```
 
-Now let's create a blank folder for our tests, in it we need to create a `.paparazzirc` config file, it's JSON and here's an example:
+This will install the `paparazzi` cli tool. You can also use `npx` instead.
+
+Then in the folder you want to run tests for (this could be your project folder, for instance), create a `.paparazzirc` config file, it's JSON and here's an example:
 
 ```
 {
   // Name of the folder where screenshots will go to
   "out": "screenies",
-  
+
   // List of routes you wanna screenshot
   "routes": [
     "uk",
@@ -30,10 +35,10 @@ Now let's create a blank folder for our tests, in it we need to create a `.papar
     "uk/contribute/recurring",
     "paypal/return"
   ],
-  
+
   // Domain you want to test the routes against
   "prefix": "https://support.thegulocal.com/",
-  
+
   // Screen size pairs
   "sizes": {
     "desktop": {
@@ -51,13 +56,13 @@ Now let's create a blank folder for our tests, in it we need to create a `.papar
   }
 }
 ```
-Now run `paparazzi` and watch the screenshots appear in front of your eyes.
+
+Now run `paparazzi` or `npx @guardian/paparazzi` and watch the screenshots appear in front of your eyes.
 
 ### Can I set this up as a CI step?
-Maybe? If you do please let me know, i'd love to get this thing commenting with screenshots on PRs
 
-### Help my computer caught fire
-Paparazzi spins a whole chrome instance per route, if this is a problem for you please consider either throwing sticks of ram at your laptop until the fire is out or help me implement something <a href="https://github.com/GoogleChrome/puppeteer/issues/1479">like this</a>
+That would be awesome! If you do please let us know and we'll add it to the docs. A great use case would be to automatically add screenshots on your PRs as a comment.
 
-### (1) Can I use this locally?
-Sure thing pal! Just run `./index.js` or `node index.js` in the `paparazzizi` folder. You will have to put your `.paparazzirc` file in there.
+### Help! my computer caught fire
+
+Paparazzi spins a whole chrome instance per route, this is not efficient and can break havoc when using many routes. THere are solutions that can be implmeented such as <a href="https://github.com/GoogleChrome/puppeteer/issues/1479">this</a>. PRs welcome!
