@@ -1,6 +1,6 @@
 {
 	"name": "@guardian/paparazzi",
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"description": "Automated manual visual regression testing",
 	"main": "index.js",
 	"bin": {
