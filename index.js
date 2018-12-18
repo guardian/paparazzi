@@ -15,7 +15,7 @@ const fetchConfigFile = file => {
 		return require(file);
 	} catch (error) {
 		try {
-			return JSON.parse(readFileSync(resolve(process.cwd(), config), 'utf8'));
+			return JSON.parse(readFileSync(file, 'utf8'));
 		} catch (error) {
 			console.error(chalk.red(`error!   ${error}`));
 			return {};
