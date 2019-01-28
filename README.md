@@ -33,7 +33,7 @@ Then in the folder you want to run tests for (this could be your project folder,
     "paypal/return"
   ],
 
-  // Domain you want to test the routes against
+  // [optional] Domain you want to test the routes against
   "prefix": "https://support.thegulocal.com/",
 
   // [optional] Name of the folder where screenshots will go to

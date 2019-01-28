@@ -51,7 +51,7 @@ const getConfigOrFail = () => {
 	await cluster.task(async ({ page, data }) => {
 		const { route } = data;
 		console.log(`started  ${route}`);
-		await page.goto([prefix, route].join('/'));
+		await page.goto(prefix ? [prefix, route].join('/') : route);
 
 		for (let size in sizes) {
 			try {
