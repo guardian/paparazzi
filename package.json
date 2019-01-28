@@ -1,6 +1,6 @@
 {
 	"name": "@guardian/paparazzi",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"description": "Automated manual visual regression testing",
 	"main": "index.js",
 	"bin": {
@@ -13,6 +13,7 @@
 	"author": "Lau gonzalez",
 	"dependencies": {
 		"chalk": "^2.4.1",
+		"filenamify": "^2.1.0",
 		"minimist": "^1.2.0",
 		"mkdirp": "^0.5.1",
 		"puppeteer": "^1.11.0",

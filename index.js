@@ -3,6 +3,7 @@
 const { Cluster } = require('puppeteer-cluster');
 const chalk = require('chalk');
 const mkdirp = require('mkdirp');
+const sanitize = require('filenamify');
 const { resolve } = require('path');
 const { readFileSync } = require('fs');
 const { config } = {
@@ -29,7 +30,7 @@ const getConfigOrFail = () => {
 		...fetchConfigFile(resolve(process.cwd(), config)),
 	};
 
-	if (!conf.prefix || !conf.routes || !conf.out) {
+	if (!conf.routes || !conf.out) {
 		console.error(
 			chalk.red(`error!   Could not find ${config} in the current folder`)
 		);
@@ -57,7 +58,7 @@ const getConfigOrFail = () => {
 			try {
 				await page.setViewport(sizes[size]);
 				await page.screenshot({
-					path: `${out}/${size}-${route.replace(/\//gi, '-')}.png`,
+					path: `${out}/${size}-${sanitize(route, { replacement: '-' })}.png`,
 					...screenshot,
 				});
 				console.log(chalk.blue(`done     ${route} – ${size}`));
